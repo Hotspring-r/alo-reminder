@@ -3,21 +3,20 @@ export function start() {
     const config = getConfig();
     const calendar = CalendarApp.getCalendarById(config.calendarId);
     const today = new Date();
-    const events = calendar.getEventsForDay(addDays(today, config.beforeDays));
+    for (const beforeDay of config.beforeDays) {
+        const events = calendar.getEventsForDay(addDays(today, beforeDay));
+        for (const event of events) {
+            const title = event.getTitle();
+            const startTime = event.getStartTime();
+            const location = event.getLocation();
+            const description = event.getDescription();
 
-    for (const eventIndex in events) {
-        const event = events[eventIndex];
-
-        const title = event.getTitle();
-        const startTime = event.getStartTime();
-        const location = event.getLocation();
-        const description = event.getDescription();
-
-        const subject = title + ' リマインド';
-        const body = `${title}のリマインドです。\n日時:${dateToString(startTime)}\n場所:${location}\n${decodeHtml(description)}\n`;
-        const options = { name: config.senderName, from: config.senderAddress };
-        GmailApp.sendEmail(config.recipient, subject, body, options);
-        console.info(body);
+            const subject = title + ' リマインド';
+            const body = `${title}のリマインドです。\n日時:${dateToString(startTime)}\n場所:${location}\n${decodeHtml(description)}\n`;
+            const options = { name: config.senderName, from: config.senderAddress };
+            GmailApp.sendEmail(config.recipient, subject, body, options);
+            console.info(body);
+        }
     }
 }
 
@@ -31,8 +30,9 @@ function getConfig(): configType {
 }
 
 function addDays(date: Date, days: number): Date {
-    date.setDate(date.getDate() + days);
-    return date;
+    const date2 = new Date(date);
+    date2.setDate(date.getDate() + days);
+    return date2;
 }
 
 function dateToString(date: GoogleAppsScript.Base.Date) {

@@ -1,10 +1,10 @@
 {
   "name": "aloreminder",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "login": "clasp login --no-localhost",
+    "login": "clasp login",
     "push": "clasp push",
     "create": "clasp create --type standalone --title AloReminder"
   },
@@ -12,10 +12,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/google-apps-script": "^1.0.46",
+    "@types/google-apps-script": "^1.0.56",
     "typescript": "^4.6.3"
   },
   "devDependencies": {
     "@types/node": "^17.0.38"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hotspring-r/alo-reminder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hotspring-r/alo-reminder/issues"
+  },
+  "homepage": "https://github.com/Hotspring-r/alo-reminder#readme"
 }

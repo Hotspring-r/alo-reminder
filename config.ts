@@ -3,7 +3,7 @@ export type configType = {
     recipient: string,
     senderName: string,
     senderAddress: string,
-    beforeDays: number
+    beforeDays: number[]
 }
 
 export const config = {
@@ -11,5 +11,5 @@ export const config = {
     recipient: '*****@*****.com',
     senderName: '*********',
     senderAddress: "*****@******.com",
-    beforeDays: 2
+    beforeDays: [2,7]
 } as configType;
